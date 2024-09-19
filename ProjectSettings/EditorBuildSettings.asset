@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/00-Scenes/Main-Prototype 1.unity
     guid: 84930580229bb4f138179e160aab9b89
+  - enabled: 1
+    path: Assets/00-Scenes/SAVE FILE APPLEPICKER.unity
+    guid: d0a9e52f5eab84f3ba1a1abf512b07df
   m_configObjects: {}
