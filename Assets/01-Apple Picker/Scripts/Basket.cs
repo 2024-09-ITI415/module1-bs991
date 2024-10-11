@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -61,6 +62,7 @@ public class Basket : MonoBehaviour {
                 if (int.TryParse(scoreGT.text, out score)) {
                     // Add points for catching the apple
                     score += 100;
+                    HighScore.TRY_SET_HIGH_SCORE(score);
 
                     // Convert the score back to a string and update the scoreGT text
                     scoreGT.text = score.ToString();
@@ -74,3 +76,4 @@ public class Basket : MonoBehaviour {
         }
     }
 }
+

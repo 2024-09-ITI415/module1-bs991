@@ -1,16 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ApplePicker : MonoBehaviour {
-    [Header("Set in Inspector")]
+    [Header("Inscribed")]
     public GameObject basketPrefab;
     public int numBaskets = 3;
     public float basketBottomY = -14f;
     public float basketSpacingY = 2f;
-
-    // List to keep track of the baskets
-    private List<GameObject> basketList;
+    public List<GameObject> basketList;
 
     void Start() {
         // Initialize the basket list
@@ -22,42 +21,25 @@ public class ApplePicker : MonoBehaviour {
             Vector3 pos = Vector3.zero;
             pos.y = basketBottomY + (i * basketSpacingY);
             tBasketGO.transform.position = pos;
-
-            // Add the created basket to the list
             basketList.Add(tBasketGO);
         }
-
-        // Log initial baskets
-        Debug.Log("Baskets created: " + basketList.Count);
     }
 
     public void AppleDestroyed() {
         // Find all GameObjects tagged as "Apple"
-        GameObject[] tAppleArray = GameObject.FindGameObjectsWithTag("Apple");
-
+        GameObject[] appleArray = GameObject.FindGameObjectsWithTag("Apple");
         // Loop through each apple and destroy it
-        foreach (GameObject tGO in tAppleArray) {
-            Destroy(tGO);
+        foreach (GameObject tempGO in appleArray) {
+            Destroy(tempGO);
         }
-    }
-
-    public void DestroyLastBasket() {
-        // Check if there are any baskets to destroy
-        if (basketList.Count > 0) {
-            // Get the index of the last basket in the list
             int basketIndex = basketList.Count - 1;
-
             // Get a reference to that basket GameObject
-            GameObject tBasketGO = basketList[basketIndex];
-
-            // Log the basket being destroyed
-            Debug.Log("Destroying basket: " + tBasketGO.name);
-
-            // Remove the basket from the list and destroy it
+            GameObject basketGO = basketList[basketIndex];
             basketList.RemoveAt(basketIndex);
-            Destroy(tBasketGO);
-        } else {
-            Debug.LogWarning("No baskets to destroy.");
-        }
+            Destroy(basketGO);
+            if (basketList.Count == 0) {
+                SceneManager.LoadScene("_Main-ApplePicker");
+        } 
     }
 }
+
